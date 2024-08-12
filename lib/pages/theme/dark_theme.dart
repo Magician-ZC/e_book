@@ -5,7 +5,7 @@ ThemeData darkMode = ThemeData(
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0.0,
     ),
-    colorScheme: ColorScheme.light(
+    colorScheme: ColorScheme.dark(
       primary: const Color(0xFF3CA9FC),
       onPrimary: Colors.white,
       secondary: const Color(0xFFABC1D2).withOpacity(0.25),

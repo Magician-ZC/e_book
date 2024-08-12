@@ -1,4 +1,4 @@
-import 'package:e_book/pages/home/home_page.dart';
+import 'package:e_book/pages/root/root_page.dart';
 import 'package:e_book/pages/theme/dark_theme.dart';
 import 'package:e_book/pages/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: Provider.of<ThemeProvider>(context, listen: true).themeData,
           darkTheme: darkMode,
-          home: const HomePage(),
+          home: const RootPage(),
         );
       },
     );
