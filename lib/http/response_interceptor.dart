@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_book/utils/toast_utils.dart';
 import 'package:flutter/material.dart';
 
 class ResponseInterceptor extends Interceptor {
@@ -22,6 +23,7 @@ class ResponseInterceptor extends Interceptor {
     }
 
     debugPrint(errorMessage);
+    ToastUtils.showErrorMsg(errorMessage);
     return handler.next(err);
   }
 }
