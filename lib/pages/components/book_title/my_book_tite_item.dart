@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_book/model/book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyBookTileItem extends StatelessWidget {
@@ -8,8 +9,14 @@ class MyBookTileItem extends StatelessWidget {
   final double? height;
   final double? width;
   final bool? showPrice;
+  final bool? showRate;
   const MyBookTileItem(
-      {super.key, required this.book, this.height, this.width, this.showPrice});
+      {super.key,
+      required this.book,
+      this.height,
+      this.width,
+      this.showPrice,
+      this.showRate = false});
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +71,9 @@ class MyBookTileItem extends StatelessWidget {
                   color: Theme.of(context).colorScheme.inversePrimary),
             ),
           ),
+
+          //评分
+          _getRageUI(),
         ],
       ),
     );
@@ -95,5 +105,32 @@ class MyBookTileItem extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  Widget _getRageUI() {
+    if (showRate != true) {
+      return const SizedBox();
+    }
+    return Container(
+      margin: EdgeInsets.only(top: 6.h),
+      width: width,
+      child: Row(
+        children: [
+          RatingBar.builder(
+              itemCount: 5,
+              itemSize: 15.r,
+              ignoreGestures: true,
+              initialRating: (book.rate ?? 0.0) / 2,
+              minRating: 1,
+              direction: Axis.horizontal,
+              itemPadding: EdgeInsets.only(right: 2.w),
+              itemBuilder: (context, _) {
+                return Icon(Icons.star,
+                    color: Theme.of(context).colorScheme.tertiary);
+              },
+              onRatingUpdate: (rating) {})
+        ],
+      ),
+    );
   }
 }

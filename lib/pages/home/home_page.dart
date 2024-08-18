@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                             books: books,
                             height: 160.h,
                             width: 120.w,
+                            title: "特别为您准备",
                           );
                         },
                         selector: (_, viewModel) => viewModel.books),

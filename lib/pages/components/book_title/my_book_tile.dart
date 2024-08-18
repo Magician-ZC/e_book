@@ -9,6 +9,8 @@ class MyBookTile extends StatelessWidget {
   final double? height;
   final double? width;
   final bool? showPrice;
+  final String title;
+  final bool? showRate;
   final Function(Book book)? itemTap;
   const MyBookTile({
     super.key,
@@ -17,6 +19,8 @@ class MyBookTile extends StatelessWidget {
     this.width,
     this.showPrice = false,
     this.itemTap,
+    required this.title,
+    this.showRate,
   });
 
   @override
@@ -26,7 +30,7 @@ class MyBookTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '特别为您准备',
+          title,
           style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w600,
@@ -57,6 +61,7 @@ class MyBookTile extends StatelessWidget {
                   width: width ?? 120.w,
                   height: height ?? 160.h,
                   showPrice: showPrice,
+                  showRate: showRate,
                 ),
               );
             }),
