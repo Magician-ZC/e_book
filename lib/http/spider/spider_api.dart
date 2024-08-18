@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:e_book/http/dio_instance.dart';
 import 'package:e_book/http/spider/api_string.dart';
 import 'package:e_book/model/activity.dart';
@@ -12,6 +13,16 @@ class SpiderApi {
 
   static SpiderApi instance() {
     return _instance ??= SpiderApi._();
+  }
+
+  ///获取图书活动
+  Future<List<Activity>> fetchBookActivities(int? kind) async {
+    Map<String, dynamic>? param = kind == null ? null : {"kind": kind};
+    Response res = await DioInstance.instance()
+        .get(path: ApiString.bookActivitiesJsonUrl, param: param);
+    String htmlStr = res.data['result'];
+    Document doc = parse(htmlStr);
+    return parseBookActivities(doc);
   }
 
   ///获取首页数据

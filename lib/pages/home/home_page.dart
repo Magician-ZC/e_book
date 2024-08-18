@@ -1,9 +1,11 @@
 import 'package:e_book/model/activity.dart';
 import 'package:e_book/model/book.dart';
-import 'package:e_book/pages/components/my_book_tile.dart';
+import 'package:e_book/pages/components/book_title/my_book_tile.dart';
 import 'package:e_book/pages/components/my_search_tile.dart';
 import 'package:e_book/pages/home/components/my_book_activities.dart';
+import 'package:e_book/pages/home/components/my_book_activities_skeleton.dart';
 import 'package:e_book/pages/home/components/my_book_activity_labels.dart';
+import 'package:e_book/pages/home/components/my_book_activity_labels_skeleton.dart';
 import 'package:e_book/pages/home/home_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     Selector<HomeViewModel, List<Activity>?>(
                         builder: (context, List<Activity>? activities, child) {
                           if (activities == null) {
-                            return const SizedBox();
+                            return const MyBookActivitiesSkeleton();
                           }
                           return MyBookActivities(activities: activities);
                         },
@@ -78,9 +80,15 @@ class _HomePageState extends State<HomePage> {
                     Selector<HomeViewModel, List<String>?>(
                         builder: (context, labels, child) {
                           if (labels == null) {
-                            return const SizedBox();
+                            return const MyBookActivityLabelsSkeleton();
                           }
-                          return MyBookActivityLabels(labels: labels);
+                          return MyBookActivityLabels(
+                            labels: labels,
+                            itemTap: (index) {
+                              int? kind = index == 0 ? null : index - 1;
+                              _viewModel.getBookActivities(kind);
+                            },
+                          );
                         },
                         selector: (_, viewModel) => viewModel.activityLabels),
                     30.verticalSpace,

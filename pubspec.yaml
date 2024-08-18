@@ -47,6 +47,7 @@ dependencies:
   shared_preferences: ^2.0.15
   delightful_toast: ^1.1.0
   html: ^0.15.4
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

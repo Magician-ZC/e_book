@@ -36,4 +36,8 @@ class HomeViewModel extends ChangeNotifier {
       booksCallback: (values) => books = values,
     );
   }
+
+  Future getBookActivities(int? kind) async {
+    activities = await SpiderApi.instance().fetchBookActivities(kind);
+  }
 }
